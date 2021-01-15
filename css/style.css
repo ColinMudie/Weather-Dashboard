@@ -1,3 +1,17 @@
 #todayWeather {
     display: none
 }
+
+/* classes to set color for UV Index */
+.badge-green {
+    background-color: yellowgreen;
+}
+.badge-yellow {
+    background-color: yellow;
+}
+.badge-orange {
+    background-color: orange;
+}
+.badge-red {
+    background-color: orangered;
+}

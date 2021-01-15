@@ -1,4 +1,5 @@
 $("#searchBtn").on('click', function () {
+
     let userInput = $('#userInput').val();
     let apiKey = '28095ae178a854ce629a96d482721f5d';
     
@@ -26,7 +27,7 @@ $("#searchBtn").on('click', function () {
             $('#date').text(date);
             $('#weather-icon').attr("src", weatherIconURL);
             $('#temperature').text("Temperature: " + temperature);
-            $('#humidity').text("Humidity: " + humidity);
+            $('#humidity').text(humidity);
             $('#wind-speed').text("Wind Speed: " + windSpeed);
 
 
@@ -39,7 +40,21 @@ $("#searchBtn").on('click', function () {
             })
                 .then(function (response2) {
                     let uvIndex = response2.value;
-                    $('#uv-index').text("UV Index: " + uvIndex);
+                    $('.badge').text(uvIndex);
+                    //Determine which color to display the UV Index
+                    if (uvIndex >= 3 && uvIndex < 6) {
+                        $('#uv-color').attr("class", "badge badge-yellow");
+                    }
+                    else if (uvIndex >= 6 && uvIndex < 8){
+                        $('#uv-color').attr("class", "badge badge-orange");
+                    }
+                    else if (uvIndex >= 8){
+                        $('#uv-color').attr("class", "badge badge-red");
+                    }
+                    else {
+                        $('#uv-color').attr("class", "badge badge-green");
+                    }
+
                     //displays weather card
                     $('#todayWeather').css('display', 'inline');
                 })
