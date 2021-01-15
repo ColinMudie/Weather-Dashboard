@@ -1,15 +1,16 @@
 $("#searchBtn").on('click', function () {
     let userInput = $('#userInput').val();
-    console.log(userInput);
     let apiKey = '28095ae178a854ce629a96d482721f5d';
+    
     //Current Weather API
     let cityNameURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&appid=' + apiKey
+
     $.ajax({
         url: cityNameURL,
         method: 'GET'
     })
         .then(function (response) {
-            console.log(response)
+            console.log(response);
             let cityName = response.city.name;
             let date = response.list[0].dt_txt;
             let weatherIcon = response.list[0].weather[0].icon;
@@ -20,6 +21,7 @@ $("#searchBtn").on('click', function () {
             let currentLat = response.city.coord.lat;
             let currentLon = response.city.coord.lon;
 
+            //Changing text content of Current Weather Card
             $('#city-name').text(cityName);
             $('#date').text(date);
             $('#weather-icon').attr("src", weatherIconURL);
@@ -28,13 +30,6 @@ $("#searchBtn").on('click', function () {
             $('#wind-speed').text("Wind Speed: " + windSpeed);
 
 
-            console.log('City: ' + cityName);
-            console.log('Date: ' + date);
-            console.log('Weather Icon: ' + weatherIcon);
-            console.log('Temperature: ' + temperature);
-            console.log('Humidity: ' + humidity);
-            console.log('Wind Speed: ' + windSpeed);
-            console.log('lat: ' + currentLat + ', long: ' + currentLon);
 
             // UV Index API
             let uvIndexURL = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + currentLat + '&lon=' + currentLon + '&appid=' + apiKey;
@@ -43,12 +38,36 @@ $("#searchBtn").on('click', function () {
                 method: 'GET'
             })
                 .then(function (response2) {
-                    console.log(response2);
                     let uvIndex = response2.value;
-                    console.log('UV Index: ' + uvIndex);
                     $('#uv-index').text("UV Index: " + uvIndex);
+                    //displays weather card
+                    $('#todayWeather').css('display', 'inline');
                 })
+            
 
-
+            //5 Day Weather Forecast
+            let six = 6;
+            for (let i = 1; i < six; i++) {
+            let fiveDayDate = (response.list[i].dt_txt).split(" ");
+            let fiveDayWeatherIcon = response.list[i].weather[0].icon
+            let fiveDayWeatherIconURL = "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png";
+            let fiveDayTemperature = "Temperature: " + (Math.round(9 / 5 * ((response.list[i].main.temp) - 273) + 32));
+            let fiveDayHumidity = "Humidity: " + response.list[i].main.humidity;
+            let fiveDayCard = $(`
+                <div class="col-sm">
+                    <div class="card-body card">
+                        <h5 class="card-title">${fiveDayDate[0]}</h5>
+                        <div id="5day-icon-${i}"><img id="5day-weather-icon-${i}" src="${fiveDayWeatherIconURL}" alt="Weather Icon"></div>
+                        <p class="card-text">${fiveDayTemperature}</p>
+                        <p class="card-text">${fiveDayHumidity}</p>
+                    </div>
+                </div>
+            `)
+            $('#5Day-Forecast').append(fiveDayCard);
+            console.log(fiveDayDate);
+            console.log(fiveDayWeatherIcon);
+            console.log(fiveDayTemperature);
+            console.log(fiveDayHumidity);
+            }
         })
 });
