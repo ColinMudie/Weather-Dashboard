@@ -70,7 +70,9 @@ function getThatWeather(userInput) {
             //5 Day Weather Forecast
             let six = 6;
             $('#5Day-Forecast').empty();
-            for (let i = 1; i < six; i++) {
+            for (let index = 1; index < six; index++) {
+                console.log(index*8-3)
+                let i = (index*8)-3;
                 let fiveDayDate = (response.list[i].dt_txt).split(" ");
                 let fiveDayWeatherIcon = response.list[i].weather[0].icon
                 let fiveDayWeatherIconURL = "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png";
@@ -91,7 +93,7 @@ function getThatWeather(userInput) {
 
             // Append Local Storage Name to List.
 
-
+            
         })
 }
 
