@@ -2,6 +2,7 @@ let allEntries = JSON.parse(localStorage.getItem('all Entries'));
 if (allEntries === null) {
     allEntries = [];
 }
+let lastEntry = allEntries[(allEntries.length) - 1];
 
 
 function getThatWeather(userInput) {
@@ -66,6 +67,7 @@ function getThatWeather(userInput) {
 
             //5 Day Weather Forecast
             let six = 6;
+            $('#5Day-Forecast').empty();
             for (let i = 1; i < six; i++) {
                 let fiveDayDate = (response.list[i].dt_txt).split(" ");
                 let fiveDayWeatherIcon = response.list[i].weather[0].icon
@@ -86,28 +88,49 @@ function getThatWeather(userInput) {
             }
 
             // Append Local Storage Name to List.
-            
-            $('.list-group').empty();
-            let savedEntries = JSON.parse(localStorage.getItem("all Entries"))
-            for (let index = 0; index < savedEntries.length; index++) {
-                let pastCityHTML = $(`
-                    <button type="button" class="list-group-item list-group-item-action">${savedEntries[index]}</button>
-                `)
-                $('.list-group').append(pastCityHTML);
-                
-            }
+
+
         })
 }
+
+// Write Local Storage to Page
+function printLocalStorage() {
+    $('.list-group').empty();
+    let savedEntries = JSON.parse(localStorage.getItem("all Entries"))
+    if (savedEntries === null) {
+        savedEntries = [];
+    }
+    for (let index = 0; index < savedEntries.length; index++) {
+        let pastCityHTML = $(`
+                    <button type="button" class="list-group-item list-group-item-action citybtn" data="${savedEntries[index]}">${savedEntries[index]}</button>
+                `)
+        $('.list-group').append(pastCityHTML);
+    }
+}
+
+printLocalStorage();
+getThatWeather(lastEntry);
 
 $("#searchBtn").on('click', function () {
     let userInput = $('#userInput').val();
     let currentInput = [userInput];
-    
+
     localStorage.setItem(userInput, JSON.stringify(currentInput));
     console.log(currentInput);
     console.log(allEntries);
-    allEntries.push(currentInput);
+    if (allEntries.includes(currentInput) === false){
+        allEntries.push(currentInput);
+        console.log(allEntries.includes(currentInput))
+    }
+    console.log("includes: " + allEntries.includes(currentInput));
     localStorage.setItem("all Entries", JSON.stringify(allEntries));
     console.log(allEntries);
     getThatWeather(userInput)
+    printLocalStorage();
 });
+
+$(".citybtn").on('click', function () {
+    let thisBtn = $(this).attr("data")
+    console.log($(this).attr("data"));
+    getThatWeather(thisBtn);
+})
