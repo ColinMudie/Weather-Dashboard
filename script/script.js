@@ -2,12 +2,14 @@ let allEntries = JSON.parse(localStorage.getItem('all Entries'));
 if (allEntries === null) {
     allEntries = [];
 }
+// last local storage entry to display page on last searched city upon refresh
 let lastEntry = allEntries[(allEntries.length) - 1];
 
+// for loop through array of all to check IF
 
 function getThatWeather(userInput) {
     let apiKey = '28095ae178a854ce629a96d482721f5d';
-    let cityNameURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&appid=' + apiKey
+    let cityNameURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&units=imperial&appid=' + apiKey
     //Current Weather API
     $.ajax({
         url: cityNameURL,
@@ -18,9 +20,9 @@ function getThatWeather(userInput) {
 
             let currentResponse = {
                 cityName: response.city.name,
-                date: response.list[0].dt_txt,
-                weatherIcon: "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png",
-                temperature: Math.round(9 / 5 * ((response.list[0].main.temp) - 273) + 32),
+                date: (response.list[0].dt_txt).split(" "),
+                weatherIcon: "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + ".png",
+                temperature: Math.round(response.list[0].main.temp),
                 humidity: response.list[0].main.humidity,
                 windSpeed: response.list[0].wind.speed,
                 currentLat: response.city.coord.lat,
@@ -28,8 +30,8 @@ function getThatWeather(userInput) {
             }
 
             //Changing text content of Current Weather Card
-            $('#city-name').text(currentResponse.cityName);
-            $('#date').text(currentResponse.date);
+            $('#city-name').text(currentResponse.cityName + " ");
+            $('#date').text(currentResponse.date[0]);
             $('#weather-icon').attr("src", currentResponse.weatherIcon);
             $('#temperature').text("Temperature: " + currentResponse.temperature);
             $('#humidity').text("Humidity: " + currentResponse.humidity);
@@ -72,11 +74,11 @@ function getThatWeather(userInput) {
                 let fiveDayDate = (response.list[i].dt_txt).split(" ");
                 let fiveDayWeatherIcon = response.list[i].weather[0].icon
                 let fiveDayWeatherIconURL = "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png";
-                let fiveDayTemperature = "Temperature: " + (Math.round(9 / 5 * ((response.list[i].main.temp) - 273) + 32));
+                let fiveDayTemperature = "Temperature: " + (Math.round(response.list[i].main.temp));
                 let fiveDayHumidity = "Humidity: " + response.list[i].main.humidity;
                 let fiveDayCard = $(`
             <div class="col-sm">
-                <div class="card-body card">
+                <div class="card-body card card-color">
                     <h5 class="card-title">${fiveDayDate[0]}</h5>
                     <div id="5day-icon-${i}"><img id="5day-weather-icon-${i}" src="${fiveDayWeatherIconURL}" alt="Weather Icon"></div>
                     <p class="card-text">${fiveDayTemperature}</p>
@@ -102,7 +104,7 @@ function printLocalStorage() {
     }
     for (let index = 0; index < savedEntries.length; index++) {
         let pastCityHTML = $(`
-                    <button type="button" class="list-group-item list-group-item-action citybtn" data="${savedEntries[index]}">${savedEntries[index]}</button>
+                    <button type="button" class="list-group-item list-group-item-action storage-color citybtn" data="${savedEntries[index]}">${savedEntries[index]}</button>
                 `)
         $('.list-group').append(pastCityHTML);
     }

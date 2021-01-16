@@ -14,18 +14,19 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-color">
         <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
     </nav>
+    <br>
     <!-- Textarea w/ Search Btn-->
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-3">
             <div class="input-group mb-3">
-                <input id="userInput" type="text" class="form-control" placeholder="Enter City Name Here"
+                <input id="userInput" type="text" class="form-control search-color" placeholder="Enter City Name Here"
                     aria-label="City Name" aria-describedby="button-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="searchBtn">Search</button>
+                    <button class="btn btn-outline-secondary btn-color" type="button" id="searchBtn">Search</button>
                 </div>
             </div>
         </div>
@@ -36,8 +37,9 @@
         <div class="col-md-3">
             <div class="list-group"></div>
         </div>
+        
         <!-- Today's Weather Here -->
-        <div id="todayWeather" class="card" style="width: 28rem;">
+        <div id="todayWeather" class="card card-color" style="width: 28rem;">
             <div class="card-body">
                 <div class="row">
                     <h5 id="city-name" class="card-title" >City Name</h5>
@@ -51,11 +53,15 @@
             </div>
         </div>
     </div>
+
+    <br>
     <!-- 5 Day Forecast Here -->
     <div class="container">
         <div id="5Day-Forecast" class="row">
         </div>
     </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"

@@ -1,17 +1,73 @@
+body{
+    background-color: #6b80a1;
+    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+}
+
+.navbar-color{
+    background-color: #526c9c;
+    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+    color: #b1bed4;  
+}
+
+.card-color{
+    background-color: #a8b7cd;
+    border-color: #3c5685;
+}
+.storage-color{
+    background-color: #a8b7cd;
+    border-color: #3c5685;
+}
+.storage-color:hover{
+    background-color: #94abcd;
+}
+.storage-color:focus{
+    background-color: #94abcd;
+    border-color: #3c5685;
+    border:solid 1px;
+    
+}
+.btn-color{
+    background-color: #526c9c;
+    color: #b1bed4;
+    border-color: #3c5685;
+}
+.btn-color:hover{
+    background-color: #476293;
+    color:  #94abcd;
+    border-color: #314a78;
+}
+.search-color{
+    background-color: #a8b7cd;
+    border-color: #314a78;
+}
+.search-color::selection{
+    background-color: #94abcd;
+    border-color: #314a78;
+    
+}
 #todayWeather {
-    display: none
+    display: none;
 }
 
 /* classes to set color for UV Index */
 .badge-green {
     background-color: yellowgreen;
+    border:solid 1px;
+    border-color:  #314a78;
 }
 .badge-yellow {
     background-color: yellow;
+    border:solid 1px;
+    border-color:  #314a78;
 }
 .badge-orange {
     background-color: orange;
+    border:solid 1px;
+    border-color:  #314a78;
 }
 .badge-red {
     background-color: orangered;
+    border:solid 1px;
+    border-color:  #314a78;
 }
+
