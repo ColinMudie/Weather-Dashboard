@@ -9,6 +9,9 @@ Weather App that uses the information from [Open Weather API](https://openweathe
 
 The Site also utilizes Local Storage to store the previous searched Cities which can be clicked to return to that cities values. Upon refreshing the page, you will be displayed with the last city that was searched.
 
+## Links
+- [Weather-Dashboard](https://colinmudie.github.io/Weather-Dashboard/)
+- [Github](https://github.com/ColinMudie/Weather-Dashboard)
 
 ## Usage 
 - Begin your experience by entering a City's name into the text area labelled "Enter City Name Here"
