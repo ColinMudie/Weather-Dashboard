@@ -1,6 +1,7 @@
 body{
     background-color: #6b80a1;
     background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+    color:  #3b4b6a;
 }
 
 .navbar-color{
@@ -40,10 +41,13 @@ body{
     background-color: #a8b7cd;
     border-color: #314a78;
 }
-.search-color::selection{
+.search-color:hover{
     background-color: #94abcd;
     border-color: #314a78;
-    
+}
+.search-color:focus {
+    background-color: #94abcd;
+    border-color: #314a78;
 }
 #todayWeather {
     display: none;
@@ -71,3 +75,23 @@ body{
     border-color:  #314a78;
 }
 
+/* Moving text inside Current Day Weather */
+#city-name{
+    padding-left: 3%;
+    font-size: 160%;
+}
+#date{
+    padding-left: 2%;
+    font-size: 160%;
+}
+#weather-icon{
+    position: relative;
+    left: 10%;
+    top: -40%;
+}
+#special-row{
+    margin-bottom: -12%;
+}
+#temperature{
+    margin-top: 0%;
+}

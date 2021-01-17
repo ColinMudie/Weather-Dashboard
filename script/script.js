@@ -21,7 +21,7 @@ function getThatWeather(userInput) {
             let currentResponse = {
                 cityName: response.city.name,
                 date: (response.list[0].dt_txt).split(" "),
-                weatherIcon: "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + ".png",
+                weatherIcon: "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png",
                 temperature: Math.round(response.list[0].main.temp),
                 humidity: response.list[0].main.humidity,
                 windSpeed: response.list[0].wind.speed,
@@ -71,7 +71,6 @@ function getThatWeather(userInput) {
             let six = 6;
             $('#5Day-Forecast').empty();
             for (let index = 1; index < six; index++) {
-                console.log(index*8-3)
                 let i = (index*8)-3;
                 let fiveDayDate = (response.list[i].dt_txt).split(" ");
                 let fiveDayWeatherIcon = response.list[i].weather[0].icon
@@ -109,7 +108,7 @@ function printLocalStorage() {
                     <button type="button" class="list-group-item list-group-item-action storage-color citybtn" data="${savedEntries[index]}">${savedEntries[index]}</button>
                 `)
         $('.list-group').append(pastCityHTML);
-    }
+    } 
 }
 
 printLocalStorage();
