@@ -9,7 +9,7 @@ let lastEntry = allEntries[(allEntries.length) - 1];
 
 function getThatWeather(userInput) {
     let apiKey = '28095ae178a854ce629a96d482721f5d';
-    let cityNameURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&units=imperial&appid=' + apiKey
+    let cityNameURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&units=imperial&appid=' + apiKey
     //Current Weather API
     $.ajax({
         url: cityNameURL,
@@ -21,7 +21,7 @@ function getThatWeather(userInput) {
             let currentResponse = {
                 cityName: response.city.name,
                 date: (response.list[0].dt_txt).split(" "),
-                weatherIcon: "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png",
+                weatherIcon: "https://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png",
                 temperature: Math.round(response.list[0].main.temp),
                 humidity: response.list[0].main.humidity,
                 windSpeed: response.list[0].wind.speed,
@@ -40,7 +40,7 @@ function getThatWeather(userInput) {
 
 
             // UV Index API
-            let uvIndexURL = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + currentResponse.currentLat + '&lon=' + currentResponse.currentLon + '&appid=' + apiKey;
+            let uvIndexURL = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + currentResponse.currentLat + '&lon=' + currentResponse.currentLon + '&appid=' + apiKey;
             $.ajax({
                 url: uvIndexURL,
                 method: 'GET'
@@ -74,7 +74,7 @@ function getThatWeather(userInput) {
                 let i = (index*8)-3;
                 let fiveDayDate = (response.list[i].dt_txt).split(" ");
                 let fiveDayWeatherIcon = response.list[i].weather[0].icon
-                let fiveDayWeatherIconURL = "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png";
+                let fiveDayWeatherIconURL = "https://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png";
                 let fiveDayTemperature = "Temperature: " + (Math.round(response.list[i].main.temp));
                 let fiveDayHumidity = "Humidity: " + response.list[i].main.humidity;
                 let fiveDayCard = $(`
@@ -111,7 +111,7 @@ function printLocalStorage() {
     } 
 }
 
-printLocalStorage();
+printLocalStorage();           
 getThatWeather(lastEntry);
 
 $("#searchBtn").on('click', function () {
